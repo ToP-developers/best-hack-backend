@@ -29,4 +29,26 @@ public class ExeptionHandler {
         LOGGER.info("403");
         return new ResponseEntity<>(new MessageResponce(Messages.AUTHORIZED), HttpStatus.FORBIDDEN);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationExeption.class)
+    public ResponseEntity validation(ValidationExeption ex) {
+        LOGGER.info("400");
+        return ResponseEntity.badRequest().body(ex.getValidation());
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(UnauthorizedExeption.class)
+    public ResponseEntity unauthorized() {
+        LOGGER.info("403");
+        return new ResponseEntity<>(new MessageResponce(Messages.NOT_AUTHORIZED), HttpStatus.FORBIDDEN);
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(WrongAuthExeption.class)
+    public ResponseEntity wrongAuth() {
+        LOGGER.info("401");
+        return new ResponseEntity<>(new MessageResponce(Messages.AUTHORIZATION_ERROR), HttpStatus.UNAUTHORIZED);
+    }
+
 }

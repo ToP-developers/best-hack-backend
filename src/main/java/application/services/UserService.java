@@ -6,8 +6,10 @@ import application.exceptions.WrongAuthExeption;
 import application.requests.Signin;
 import application.requests.Signup;
 import application.responces.ErrorResponse;
+import application.responces.MessageResponce;
 import application.utils.Constants;
 import application.utils.CookieHelper;
+import application.utils.Messages;
 import application.utils.Validator;
 import application.exceptions.*;
 import org.jetbrains.annotations.NotNull;
@@ -59,11 +61,17 @@ public class UserService {
     }
 
     public ResponseEntity signin(Signin signup, HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        checkAuth(request);
+        UserEntity entity = getByLoginOrEmail(signup);
+        CookieHelper.addCookie(response, entity.getId().toString());
+        LOGGER.info("200");
+        return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 
     public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response) {
-        return null;
+        checkUnauth(request);
+        CookieHelper.deleteCookie(response, Constants.COOKIE_NAME);
+        return new ResponseEntity<>(new MessageResponce(Messages.SUCCESS), HttpStatus.OK);
     }
 
     @SuppressWarnings("all")
@@ -119,5 +127,11 @@ public class UserService {
 
     private boolean checkEmail(@NotNull String email) {
         return userDAO.getUserByEmail(email) == null;
+    }
+
+    private void checkUnauth(HttpServletRequest request) {
+        if (CookieHelper.getCookieValue(request, Constants.COOKIE_NAME) == null) {
+            throw new UnauthorizedExeption();
+        }
     }
 }
