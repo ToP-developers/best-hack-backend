@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/api")
 public class UserController {
     @NotNull
@@ -44,7 +45,7 @@ public class UserController {
     }
 
     @GetMapping(path = "/user", consumes = Constants.JSON, produces = Constants.JSON)
-    public ResponseEntity user(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity user(HttpServletRequest request) {
         LOGGER.info("/api/user");
         return userService.user(request);
     }
