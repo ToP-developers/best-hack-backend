@@ -1,4 +1,4 @@
-package application.dao;
+package application.dao.user;
 
 import application.entities.UserEntity;
 import application.requests.Signup;
@@ -17,4 +17,7 @@ public interface UserDAO {
 
     @Nullable
     UserEntity getUserByEmail(@NotNull String email);
+
+    @Nullable
+    UserEntity getUserByToken(@NotNull String token);
 }

@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Command {
     private String url;
-    private String description;
+    private String[] description;
     private String command;
     private String[] params;
 
     @JsonCreator
     public Command(@JsonProperty("url") String url,
-                   @JsonProperty("description") String description,
+                   @JsonProperty("description") String[] description,
                    @JsonProperty("command") String command,
                    @JsonProperty("params") String[] params) {
         this.url = url;
@@ -24,7 +24,7 @@ public class Command {
         return url;
     }
 
-    public String getDescription() {
+    public String[] getDescription() {
         return description;
     }
 

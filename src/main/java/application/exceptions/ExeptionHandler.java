@@ -23,6 +23,13 @@ public class ExeptionHandler {
         return ResponseEntity.badRequest().body(new MessageResponce(Messages.BAD_COOKIE));
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(WrongTokenExeption.class)
+    public ResponseEntity token() {
+        LOGGER.info("400");
+        return ResponseEntity.badRequest().body(new MessageResponce(Messages.BAD_COOKIE));
+    }
+
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AuthorizedExeption.class)
     public ResponseEntity authorized() {

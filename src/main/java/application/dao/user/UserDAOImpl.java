@@ -1,5 +1,6 @@
-package application.dao;
+package application.dao.user;
 
+import application.dao.user.UserDAO;
 import application.entities.UserEntity;
 import application.requests.Signup;
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +56,21 @@ public class UserDAOImpl implements UserDAO {
                 UserEntity.class
         );
         query.setParameter("email", email);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Nullable
+    @Override
+    public UserEntity getUserByToken(@NotNull String token) {
+        final TypedQuery<UserEntity> query = entityManager.createQuery(
+                "SELECT u FROM UserEntity u WHERE token = :token",
+                UserEntity.class
+        );
+        query.setParameter("token", token);
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {

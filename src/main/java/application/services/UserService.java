@@ -1,6 +1,6 @@
 package application.services;
 
-import application.dao.UserDAO;
+import application.dao.user.UserDAO;
 import application.entities.UserEntity;
 import application.exceptions.WrongAuthExeption;
 import application.requests.Signin;
@@ -76,13 +76,18 @@ public class UserService {
 
     @SuppressWarnings("all")
     public ResponseEntity user(HttpServletRequest request) {
+        return new ResponseEntity<>(getByCookie(request), HttpStatus.OK);
+    }
+
+    @SuppressWarnings("all")
+    public UserEntity getByCookie(HttpServletRequest request) {
         try {
             Long id = Long.parseLong(CookieHelper.getCookieValue(request, Constants.COOKIE_NAME));
             UserEntity entity = userDAO.getUserById(id);
             if (entity == null) {
                 throw new BadCookieException();
             }
-            return new ResponseEntity<>(entity, HttpStatus.OK);
+            return entity;
         } catch (NumberFormatException ex) {
             throw new BadCookieException();
         }

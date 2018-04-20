@@ -1,6 +1,7 @@
 package application.entities;
 
 import application.requests.Signup;
+import application.utils.Generator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,6 +28,9 @@ public class UserEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "token")
+    private String token;
+
     public UserEntity() {
     }
 
@@ -35,6 +39,7 @@ public class UserEntity {
         this.email = signup.getEmail();
         this.password = signup.getPassword();
         this.name = signup.getName();
+        this.token = Generator.generateToken();
     }
 
     public Long getId() {
@@ -71,5 +76,9 @@ public class UserEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getToken() {
+        return token;
     }
 }
