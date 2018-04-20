@@ -8,7 +8,7 @@ public class Signin {
     @NotNull
     private final String login;
     @NotNull
-    private final String password;
+    private String password;
 
     @JsonCreator
     public Signin(@JsonProperty("login") @NotNull String login,
@@ -25,5 +25,9 @@ public class Signin {
     @NotNull
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(@NotNull String password) {
+        this.password = password;
     }
 }

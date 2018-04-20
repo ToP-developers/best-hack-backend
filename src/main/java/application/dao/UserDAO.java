@@ -7,14 +7,14 @@ import org.jetbrains.annotations.Nullable;
 
 public interface UserDAO {
     @NotNull
-    UserEntity addAdvertiser(@NotNull Signup signup);
+    UserEntity addUser(@NotNull Signup signup);
 
     @Nullable
-    UserEntity getAdvertiserById(@NotNull Long userId);
+    UserEntity getUserById(@NotNull Long userId);
 
     @Nullable
-    UserEntity getAdvertiserByLogin(@NotNull String login);
+    UserEntity getUserByLogin(@NotNull String login);
 
     @Nullable
-    UserEntity getAdvertiserByEmail(@NotNull String email);
+    UserEntity getUserByEmail(@NotNull String email);
 }

@@ -1,12 +1,13 @@
 package application.entities;
 
 import application.requests.Signup;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "advertisers")
+@Table(name = "users")
 public class UserEntity {
     @Id
     @Column(name = "id", unique = true, nullable = false)
@@ -19,6 +20,7 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 

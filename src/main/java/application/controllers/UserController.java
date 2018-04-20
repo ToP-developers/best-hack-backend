@@ -27,20 +27,26 @@ public class UserController {
 
     @PostMapping(path = "/signup", consumes = Constants.JSON, produces = Constants.JSON)
     public ResponseEntity signup(@RequestBody Signup body, HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("/api/advertiser/signup");
+        LOGGER.info("/api/signup");
         return userService.signup(body, request, response);
     }
 
     @PostMapping(path = "/signin", consumes = Constants.JSON, produces = Constants.JSON)
     public ResponseEntity signin(@RequestBody Signin body, HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("/api/advertiser/signup");
+        LOGGER.info("/api/signin");
         return userService.signin(body, request, response);
     }
 
     @GetMapping(path = "/logout", consumes = Constants.JSON, produces = Constants.JSON)
     public ResponseEntity logout(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("/api/advertiser/signup");
+        LOGGER.info("/api/logout");
         return userService.logout(request, response);
+    }
+
+    @GetMapping(path = "/user", consumes = Constants.JSON, produces = Constants.JSON)
+    public ResponseEntity user(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.info("/api/user");
+        return userService.user(request);
     }
 
 }

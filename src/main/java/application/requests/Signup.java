@@ -25,4 +25,5 @@ public class Signup extends Signin {
     public String getName() {
         return name;
     }
+
 }
