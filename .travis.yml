@@ -12,7 +12,7 @@ deploy:
   provider: heroku
   api_key:
     secure: $key
-  app: apoj
+  app: best-hack
   on:
     repo: ToP-developers/best-hack-backend
     branch: master
