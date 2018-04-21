@@ -20,6 +20,9 @@ public class CommandDAOImpl implements CommandDAO {
 
     @Override
     public void create(@NotNull Command[] commands, @NotNull Long id) {
+        entityManager.createQuery("DELETE FROM CommandEntity WHERE user_id = :user_id")
+                .setParameter("user_id", id)
+                .executeUpdate();
         for (Command command : commands) {
             entityManager.persist(new CommandEntity(command, id));
         }
